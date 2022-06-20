@@ -1,1 +1,20 @@
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        solution=[]
+        def inorder(root):
+        
+            #if node is Null --> return
+            if root==None:
+                return 
 
+            #left 
+            inorder(root.left) 
+            #root
+            solution.append(root.val)
+            #right
+            inorder(root.right)
+            
+        
+    
+        inorder(root)
+        return solution
