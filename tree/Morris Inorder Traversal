@@ -2,3 +2,30 @@
 Time complexity = O(N)
 Space Complexity = 1
 ##########################################################
+
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        inorder=[]
+        cur=root
+        
+        while cur!=None:
+            # if left node is not present then print cur and move to right
+            if cur.left==None:
+                inorder.append(cur.val)
+                cur=cur.right
+            #if left node is present then in left node move to rightmost node 
+            else:
+                
+                prev=cur.left
+                while prev.right and prev.right!=cur:
+                    prev=prev.right
+                #if rightmost node->right child is null then make thread to cur node
+                if prev.right==None:
+                    prev.right=cur
+                    cur=cur.left
+                #if rightmost node->right child already have thread then break that thread ,print cur and move to right node
+                else:
+                    prev.right=None
+                    inorder.append(cur.val)
+                    cur=cur.right
+        return inorder
