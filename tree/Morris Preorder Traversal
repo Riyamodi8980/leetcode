@@ -1,0 +1,26 @@
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        preorder=[]
+        cur=root
+        
+        while cur!=None:
+            # if left node is not present then print cur and move to right
+            if cur.left==None:
+                preorder.append(cur.val)
+                cur=cur.right
+            #if left node is present then in left node move to rightmost node 
+            else:
+                
+                prev=cur.left
+                while prev.right and prev.right!=cur:
+                    prev=prev.right
+                #if rightmost node->right child is null then make thread to cur node and print cur node
+                if prev.right==None:
+                    preorder.append(cur.val)
+                    prev.right=cur
+                    cur=cur.left
+                #if rightmost node->right child already have thread then break that thread and move to right node
+                else:
+                    prev.right=None
+                    cur=cur.right
+        return preorder
