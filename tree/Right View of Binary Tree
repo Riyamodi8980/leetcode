@@ -1,0 +1,19 @@
+#The First Node of every level will be the Right View.
+#using inverse preorder traversal (root right left)
+#T.C=O(N)
+#S.C=O(H)
+
+class Solution:
+    #Function to return list containing elements of right view of binary tree.
+    def rightView(self,root):
+        ds=[]
+        def right(root,level):
+            if root==None:
+                return 
+            #The first node of the level
+            if level==len(ds):
+                ds.append(root.data)
+            right(root.right,level+1)
+            right(root.left,level+1)
+        right(root,0)
+        return ds   
