@@ -1,0 +1,15 @@
+#using preorder traversal
+#The First Node of every level will be the left View
+
+def LeftView(root):
+    ds=[]
+    def left(root,level):
+        if root==None:
+            return 
+        #If it is first node of level  
+        if level==len(ds):
+            ds.append(root.data)
+        left(root.left,level+1)
+        left(root.right,level+1)
+    left(root,0)
+    return ds
