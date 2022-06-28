@@ -1,0 +1,41 @@
+class BinaryTreeNode :
+    def __init__(self, data) :
+        self.data = data
+        self.left = None
+        self.right = None
+
+def getTreeTraversal(root):
+    # Write your code here.
+    
+    #stack
+    st=[(root,1)]
+    
+    pre=[]
+    post=[]
+    ino=[]
+    
+    if root==None:
+        return [ino,pre,post]
+    
+    while len(st):
+        
+        node,num=st.pop()
+        #if first visit, then it wil be in preorder
+        if num==1:
+            pre.append(node.data)
+            st.append((node,2))
+            if node.left!=None:
+                st.append((node.left,1))
+        #if second visit, then it wil be in inorder
+        elif num==2:
+            ino.append(node.data)
+            st.append((node,3))
+            if node.right!=None:
+                st.append((node.right,1))
+       #if third visit, then it wil be in postorder
+        else:
+            post.append(node.data)
+           
+    return [ino,pre,post]
+
+        
