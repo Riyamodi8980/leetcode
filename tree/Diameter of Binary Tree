@@ -1,5 +1,5 @@
 # Diameter of binary Tree is
-# 1.longest distance between two nodes
+# 1.longest distance between two leaf nodes
 # 2.path does not need to pass via root
 
 
@@ -7,7 +7,7 @@
 
 class Solution:
     def diameterOfBinaryTree(self, root: TreeNode) -> int:
-
+        #calculate height
         def height(root: TreeNode):
             if root == None:
                 return 0
@@ -15,13 +15,18 @@ class Solution:
             right = height(root.right)
             return 1 + max(left, right)
 
+
+        
         def FindBinary(root: TreeNode):
             if root == None:
                 return 0
+            
             h1 = height(root.left)
             h2 = height(root.right)
             op1 = h1+h2
+            #left diameter
             op2 = FindBinary(root.left)
+            #right diameter
             op3 = FindBinary(root.right)
             return max(op1, op2, op3)
 
