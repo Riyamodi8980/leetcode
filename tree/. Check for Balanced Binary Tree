@@ -10,8 +10,12 @@ class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
         if root == None:
             return True
+        #height of left subtree
         l = self.depth(root.left)
+        #height of right subtree
         r = self.depth(root.right)
+        #if left and right subtree height difference is smaller than 2 
+        #also valid for every node in left and right
         return (abs(l-r) <=1) and self.isBalanced(root.left) and self.isBalanced(root.right)
     
     def depth(self,node):
@@ -19,6 +23,9 @@ class Solution:
             return 0
         return max(self.depth(node.left),self.depth(node.right))+1
             
+        
+        
+        
         
         
         
