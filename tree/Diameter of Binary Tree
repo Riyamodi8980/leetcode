@@ -31,3 +31,23 @@ class Solution:
             return max(op1, op2, op3)
 
         return FindBinary(root)
+
+
+#second
+class Solution:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+     
+        self.maxi=0
+        self.maxpathdown(root,self.maxi)
+        return self.maxi
+    
+    def maxpathdown(self,root,maxi):
+        if root==None:
+            return 0
+        
+        leftmax=self.maxpathdown(root.left,self.maxi)
+        rightmax=self.maxpathdown(root.right,self.maxi)
+        
+        self.maxi=max(self.maxi,leftmax+rightmax)
+        
+        return 1+max(leftmax,rightmax)
