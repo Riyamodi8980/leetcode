@@ -1,0 +1,24 @@
+## Bottom View of Binary Tree
+## USING LEVEL ORDER TRAVERSAL
+
+class Solution:
+    def bottomView(self, root):
+        # code here
+        queue = [(root, 0)]
+        hashmap = dict()
+        while queue:
+            
+            curElem, vertical = queue.pop(0)
+            hashmap[vertical]=curElem.data
+
+            if (curElem.left):
+                queue.append((curElem.left, vertical-1))
+
+            if (curElem.right):
+                queue.append((curElem.right, vertical+1));
+                
+        ans=[]
+        keys=sorted(hashmap.keys())
+        for key in keys:
+            ans.append(hashmap[key])
+        return ans
