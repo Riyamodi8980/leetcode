@@ -1,0 +1,69 @@
+#Anticlockwise
+
+# boundry = left boundry excluding leaf nodes  + leaf nodes  + right boundry in reverse direction excluding leaf nodes.
+
+# Following is the Binary Tree node structure:
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        
+def inorder(root,result):
+    if root==None:
+        return 
+    inorder(root.left,result)
+    result.append(root)
+    inorder(root.right,result)
+    return result
+
+def isLeaf(root):
+     if not root.right and not root.left:
+        return True
+     return False
+
+def traverseBoundary(root):
+    # Write your code here.
+    ds=[]
+    
+    if root==None:
+        return ds
+    elif not isLeaf(root):
+        ds.append(root.data)
+    
+    ##  left boundry excluding leaf nodes
+    
+    cur=root.left 
+
+    while cur:
+        if not isLeaf(cur):
+            ds.append(cur.data)
+        if cur.left:
+            cur=cur.left
+        else:
+            cur=cur.right
+
+
+    ##  leaf nodes
+    result=inorder(root,[])
+    for i in result:
+        if isLeaf(i):
+            ds.append(i.data)
+      
+    ## right boundry in reverse direction excluding leaf nodes
+    ans=[]
+    cur=root.right 
+
+    while cur:
+        if not isLeaf(cur):
+            ans.append(cur.data)
+        if cur.right:
+            cur=cur.right
+        else:
+            cur=cur.left
+    
+    if ans:
+        ans.reverse()
+        ds.extend(ans)
+    return ds         
+        
