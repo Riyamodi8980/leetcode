@@ -1,3 +1,5 @@
+#Using level order traversal
+
 class Solution:
     def verticalTraversal(self, root: TreeNode) -> List[List[int]]:
         queue = [(root, 0,0)]
