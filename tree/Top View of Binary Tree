@@ -1,0 +1,26 @@
+##LEVEL ORDER TRAVERSAL
+
+class Solution:
+    
+    #Function to return a list of nodes visible from the top view 
+    #from left to right in Binary Tree.
+    def topView(self,root):
+        queue = [(root, 0)]
+        hashmap = dict()
+        while queue:
+            
+            curElem, vertical = queue.pop(0)
+            if vertical not in hashmap:
+                hashmap[vertical]=curElem.data
+
+            if (curElem.left):
+                queue.append((curElem.left, vertical-1))
+
+            if (curElem.right):
+                queue.append((curElem.right, vertical+1));
+                
+        ans=[]
+        keys=sorted(hashmap.keys())
+        for key in keys:
+            ans.append(hashmap[key])
+        return ans
