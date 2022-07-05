@@ -1,0 +1,55 @@
+## “The lowest common ancestor is defined between two nodes p and q as the lowest node in T
+## that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+##Brute Force
+##using Path to Given Node concept
+
+class Solution:
+    def helper(self,root,value,ds):
+        if root==None:
+            return False
+            
+        self.ds.append(root)
+        if root.val==value:
+            return True
+        
+        if self.helper(root.left,value,self.ds) or self.helper(root.right,value,self.ds):
+            return True
+        
+        
+        self.ds.pop()
+        return False
+       
+        
+    def Path_to_Given_Node(self, root, value):
+        self.ds=[]
+        self.helper(root,value ,self.ds)
+        return self.ds
+        
+        
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        
+        # print(p,q)
+        p_result=self.Path_to_Given_Node(root,p.val)
+        q_result=self.Path_to_Given_Node(root,q.val)
+        # print(p_result, q_result)
+        
+        for i in range(min(len(p_result),len(q_result))):
+            if p_result[i].val==q_result[i].val:
+                recent=p_result[i]
+                # print(recent)
+            else:
+                break
+        return recent
+                
+            
+        
+        
