@@ -1,0 +1,21 @@
+#T.C=O(N) 
+#S.C=O(H)
+
+class Solution:
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        self.count=0
+        
+        if root==None:
+            return self.count
+        
+        self.inorder(root)
+        return self.count        
+    
+    def inorder(self,root):
+        if root==None:
+            return 
+        self.count+=1
+        self.inorder(root.left)
+        self.inorder(root.right)
+        
+        
