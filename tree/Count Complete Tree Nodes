@@ -19,3 +19,35 @@ class Solution:
         self.inorder(root.right)
         
         
+#T.C=O(logN)**2 
+#S.C=O(logN)
+
+class Solution:
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        if root==None:
+            return 0
+        l=self.findleftheight(root)
+        r=self.findrightheight(root)
+        
+        if l==r:
+            return 2**l-1
+        
+        return 1+self.countNodes(root.left)+self.countNodes(root.right)
+    
+    def findleftheight(self,root):
+        height=0
+        while root:
+            height+=1
+            root=root.left
+        return height
+    
+    
+    def findrightheight(self,root):
+        height=0
+        while root:
+            height+=1
+            root=root.right
+        return height
+        
+        
+        
