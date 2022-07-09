@@ -1,0 +1,20 @@
+## kth largest is kth element from backside if you arranged elements in ascending order.
+## or it can be N-kth element from front.
+
+class Solution:
+    def kthLargest(self,root, k):
+        #your code here
+        ino=[]
+      
+        def inorder(root):
+            if root==None:
+                return 
+                
+            inorder(root.left)
+            ino.append(root)
+           
+            inorder(root.right)
+
+                
+        inorder(root)
+        return ino[len(ino)-k].data
