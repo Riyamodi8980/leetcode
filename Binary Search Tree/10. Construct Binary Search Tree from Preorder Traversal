@@ -1,0 +1,67 @@
+################################################################
+# using insert given node  to bst
+
+class Solution:
+    def insertIntoBST(self, root, val):
+        if root is None:
+            return TreeNode(val) 
+        if root.val > val: 
+            root.left = self.insertIntoBST(root.left, val)
+        else: 
+            root.right = self.insertIntoBST(root.right, val)
+        return root
+
+    def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
+        if len(preorder)==0:
+            return None
+        
+        root=TreeNode(preorder.pop(0))
+        
+        for ele in preorder:
+            root=self.insertIntoBST(root,ele)
+            
+        return root
+ 
+#######################################################################
+# construct bt from preorder and postorder which is unique -->in this case bst
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        
+        if len(inorder)==0:
+            return None
+        
+        inroot=inorder.index(preorder.pop(0))
+        
+        root=TreeNode(inorder[inroot]) 
+        
+        root.left=self.buildTree(preorder,inorder[:inroot])
+        root.right=self.buildTree(preorder,inorder[inroot+1:])
+    
+        return root
+
+    def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
+        
+        inorder = sorted(preorder)
+        return self.buildTree(preorder,inorder)
+        
+  #######################################################################
+  
+  #using recurssion #best
+  
+  
+  class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
+        self.index=0
+        
+        def built(ub):
+            if self.index==len(preorder) or preorder[self.index]>ub:
+                return None
+            root=TreeNode(preorder[self.index])
+            self.index+=1
+            root.left=built(root.val)
+            root.right=built(ub)
+            return root
+        return built(float('inf'))
+                
+
