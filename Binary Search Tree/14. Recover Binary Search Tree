@@ -1,0 +1,109 @@
+################################# BRUTE ##################################
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        arr=[]
+        
+        def inOrder(node):
+            if node :
+                inOrder(node.left)
+                arr.append(node)
+                inOrder(node.right)
+                return arr
+            
+        ino=inOrder(root)
+        inoC=sorted(ino,key=lambda x:x.val)
+        
+        for i in range(len(ino)):
+            print(ino[i].val,inoC[i].val)
+            if ino[i].val!=inoC[i].val:
+                ino[i].val ,inoC[i].val = inoC[i].val ,ino[i].val 
+               
+####################### ADJACENT AND NOT ADJACENT #########################
+
+
+1..ITERATIVE
+
+class Solution:
+        
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        arr=[]
+        
+        def inOrder(node):
+            if node :
+                inOrder(node.left)
+                arr.append(node)
+                inOrder(node.right)
+                return arr
+            
+        ino=inOrder(root)
+       
+        length = len(ino)
+        first,second=None,None
+        
+        for i in range(1,length):
+            if ino[i-1].val>ino[i].val:
+                if first==None:
+                    first  = ino[i-1]
+                    middle = ino[i]
+                else:
+                    second=ino[i]
+                
+         
+        if second==None:
+            first.val,middle.val=middle.val,first.val
+        else:
+            first.val,second.val=second.val,first.val
+            
+2.. RECURSSIVE
+
+class Solution:
+        
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        self.first=None
+        self.middle=None
+        self.last=None
+        self.prev=None
+        
+        def inOrder(node):
+            if node :
+                inOrder(node.left)
+                
+                if self.prev!=None and node.val<self.prev.val:
+                    if self.first==None:
+                        self.first=self.prev
+                        self.middle=node
+                    else:
+                        self.last=node
+                    
+                
+                self.prev=node
+                inOrder(node.right)
+                
+            
+        inOrder(root)
+         
+        if self.last==None:
+            self.first.val ,self.middle.val = self.middle.val ,self.first.val
+        else:
+            self.first.val ,self.last.val =self.last.val ,self.first.val
+             
+
+
+                
