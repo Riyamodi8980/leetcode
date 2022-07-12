@@ -1,0 +1,26 @@
+class Solution:
+  
+  def maxSumBST(self, root: TreeNode) -> int:
+  # declaire a variable maxSum to hold the max path sum
+    self.maxSum=0
+    def recurse(root):
+        if root:
+        
+            left,left_lb,left_ub = recurse(root.left)
+            right,right_lb,right_ub = recurse(root.right) 
+            # if a valid BST
+            if root.val>left_ub and root.val<right_lb:
+                self.maxSum=max(self.maxSum,left+right+root.val)
+                return left+right+root.val,min(root.val,left_lb),max(root.val,right_ub)
+            # if not a BST - set an impossible condition such than the root is also returned as non-BST
+            else:
+                #(sum,min,max)set max as maximum infinite and min as min infinite
+                return (max(left,right),float('-inf'),float('inf'))
+      
+        
+        else:
+        # if root not present then set min as maximum infinite and max as min infinite so on comparing it is never get selected.
+            return (0,float('inf'),float('-inf'))
+      
+    recurse(root)
+    return self.maxSum
