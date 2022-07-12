@@ -1,0 +1,18 @@
+def largestBST(root):
+    
+    def recurse(root):
+      if root:
+
+        left,left_lb,left_ub = recurse(root.left)
+        right,right_lb,right_ub = recurse(root.right) 
+         #if bst
+        if root.data>left_ub and root.data<right_lb:
+          return left+right+1,min(root.data,left_lb),max(root.data,right_ub)
+        else:
+          return (max(left,right),float('-inf'),float('inf'))
+
+      else:
+        return (0,float('inf'),float('-inf'))
+
+    total,left_lb,left_ub=recurse(root)
+    return total
