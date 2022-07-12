@@ -1,0 +1,44 @@
+Graph :
+Two component:
+1. vertex or node      2.edges
+
+Types of Graph:
+1. Undirected 
+degree-No of connected edges
+total degree of graph : 2*E
+->acyclic or cyclic
+
+2. Directed
+indegree
+outdegree
+->acyclic or cyclic
+
+-->Adjacency Matrix:
+space complexity=O(N**2)
+class Graph:
+    def __init__(self,num_nodes,edges):
+        self.num_nodes=num_nodes
+        self.data=[[0 for _ in range(self.num_nodes)] for _ in range(self.num_nodes)]
+        for u,v in edges:
+            self.data[u][v]=1
+            self.data[v][u]=1
+Disadvantage:
+1.adjacency matrix only for smaller value of input
+
+-->Adjacency list:
+space complexity=O(N+2E) each edge is stored two time
+class Graph:
+    def __init__(self, num_nodes, edges):
+        self.data = [[] for _ in range(num_nodes)]
+        for u, v in edges:
+            self.data[u].append(v)
+            self.data[v].append(u)
+            
+NOTE : 1.If their is undirected then above code work fine.            O(N+2E)
+       2.If directed then only one time edge will be inserted.        O(N+E)
+       3.If weighted then pair will be stored having edge and weight. O(N+2E+2E)
+       
+ -->Connected component in graph:
+ 1. These are the sub graph of graph which are disconnected.
+ in file notes.
+ 
