@@ -35,7 +35,7 @@ def findPreSuc(root, pre, suc, key):
             return
         
         inorder(node.left)
-        # FIRST ELEMENT SMALLER THEN KEY IS PREDECESSOR AND FIRST ELEMENT GREATER THAN KEY IS SUCCESSOR
+        # LAST ELEMENT SMALLER THEN KEY IS PREDECESSOR AND FIRST ELEMENT GREATER THAN KEY IS SUCCESSOR
         if node.key<key:
             pre[0]=node
         if node.key>key and suc[0]==None:
