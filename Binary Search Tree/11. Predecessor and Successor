@@ -1,12 +1,41 @@
+######################### CAN BE SOLVE USING CEIL AND FLOOR FUNCTION #########################
+def ceilfun(root,val):
+    ceil=None
+    if root==None:
+        return root
+    while root:
+        if root.key>val:
+            ceil=root
+            root=root.left
+        else:
+            root=root.right
+    return ceil
+            
+def floorfun(root,val):
+    floor=None
+    if root==None:
+        return root
+    while root:
+        if root.key<val:
+            floor=root
+            root=root.right
+        else:
+            root=root.left
+    return floor
+
+def findPreSuc(root, pre, suc, key):
+    #your code goes here
+    pre[0]=floorfun(root,key)
+    suc[0]=ceilfun(root,key)
+    
+###################################################################################
 def findPreSuc(root, pre, suc, key):
     def inorder(node):
-    
         if node==None:
-            return 
-        
+            return
         
         inorder(node.left)
-        
+        # FIRST ELEMENT SMALLER THEN KEY IS PREDECESSOR AND FIRST ELEMENT GREATER THAN KEY IS SUCCESSOR
         if node.key<key:
             pre[0]=node
         if node.key>key and suc[0]==None:
@@ -14,5 +43,4 @@ def findPreSuc(root, pre, suc, key):
             return
         
         inorder(node.right)
-        
     inorder(root)
