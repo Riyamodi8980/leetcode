@@ -1,0 +1,24 @@
+class Solution:
+    
+    #Function to return Breadth First Traversal of given graph.
+    def bfsOfGraph(self, V, adj):
+        # code here
+        vis=[False for i in range(V)]
+        bfs=[]
+        
+        for i in range(V):
+            if vis[i] == False:
+                que=[i]
+                vis[i]=True
+                
+                while que:
+                    v=que.pop(0)
+                    bfs.append(v)
+                    
+                    for i in adj[v]:
+                        if vis[i]==False:
+                            que.append(i)
+                            vis[i]=True
+        return bfs
+                
+                
