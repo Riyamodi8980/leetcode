@@ -1,0 +1,40 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        ans=[]
+        preMap={ i:[] for i in range(numCourses)}
+        
+        for crc,pre in prerequisites:
+            preMap[crc].append(pre)
+            
+        visitSet=set()
+        
+        def dfs(crc):
+            if crc in visitSet:
+                return False
+            if preMap[crc]==[]:
+                if crc not in ans:
+                    ans.append(crc)
+                return True
+            
+            visitSet.add(crc)
+            
+            for pre in preMap[crc]:
+                if dfs(pre)==False: 
+                    return False
+                
+            visitSet.remove(crc)
+            preMap[crc]=[]
+            ans.append(crc)
+            
+            return True
+        
+        for crc in range(numCourses):
+            if dfs(crc)==False:
+                return []
+        return ans
+        
+            
+            
+            
+        
+                
