@@ -6,16 +6,17 @@ class Solution:
         vis=[False for i in range(V)]
         bfs=[]
         
-
         que=[0]
-        vis[0]=True
-        
+                
         while que:
             v=que.pop(0)
-            bfs.append(v)
+            if vis[v] == False:
+                bfs.append(v)
+                vis[v]=True
+            
             
             for i in adj[v]:
                 if vis[i]==False:
                     que.append(i)
-                    vis[i]=True
+                    
         return bfs
