@@ -1,0 +1,26 @@
+
+class Solution:
+    
+    #Function to return a list containing the DFS traversal of the graph.
+    def dfsOfGraph(self, V, adj):
+        # code here
+        # print(V,adj)
+        ans=[]
+        vis=[False]*len(adj)
+        
+        stack=[0]
+        
+        while stack:
+            curr=stack.pop()
+            if vis[curr]==False:
+                ans.append(curr)
+                vis[curr]=True
+                
+            adj[curr].sort(reverse=True)
+            for i in adj[curr]:
+                if  vis[i]==False:
+                    stack.append(i)
+                    
+            
+            # print(stack)
+        return ans
