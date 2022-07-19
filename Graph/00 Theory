@@ -22,6 +22,10 @@ class Graph:
         for u,v in edges:
             self.data[u][v]=1
             self.data[v][u]=1
+            
+        for i in range(len(self.data)):
+            self.data[i].sort()
+            
 Disadvantage:
 1.adjacency matrix only for smaller value of input
 
@@ -33,6 +37,10 @@ class Graph:
         for u, v in edges:
             self.data[u].append(v)
             self.data[v].append(u)
+            
+        for i in range(len(self.data)):
+            self.data[i].sort()
+       
             
 NOTE : 1.If their is undirected then above code work fine.            O(N+2E)
        2.If directed then only one time edge will be inserted.        O(N+E)
