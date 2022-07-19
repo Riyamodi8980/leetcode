@@ -1,0 +1,33 @@
+
+def BFS(vertex, edges):
+    
+        vis=[False for i in range(vertex)]
+        ans=[]
+        
+        # CREATING ADJACENCY LIST
+        adj_list=[[] for i in range(vertex)]
+        for i in range(len(edges[0])):
+            u= edges[0][i]
+            v= edges[1][i]
+               
+            adj_list[u].append(v)
+            adj_list[v].append(u)
+            
+        for i in range(len(adj_list)):
+            adj_list[i].sort()
+            
+        #APPLYING LOGIC    
+        for i in range(vertex):
+            if vis[i] == False:
+                que=[i]
+                vis[i]=True
+                
+                while que:
+                    v=que.pop(0)
+                    ans.append(v)
+                    
+                    for i in adj_list[v]:
+                        if vis[i]==False:
+                            que.append(i)
+                            vis[i]=True
+        return ans
