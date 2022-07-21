@@ -1,0 +1,50 @@
+
+#RECURSIVE
+def rec(ind,heights):
+    if ind==0:
+        return 0
+    l= rec(ind-1,heights) + abs(heights[ind]-heights[ind-1])
+    r=float('inf')
+    if ind>1:
+        r= rec(ind-2,heights) + abs(heights[ind]-heights[ind-2])
+        
+    return min(l,r)
+  
+def frogJump(n: int, heights: List[int]) -> int:
+    return rec(n-1,heights)
+        
+
+# MEMOIZATION
+
+def frogJump(n: int, heights: List[int]) -> int:
+    memo=[-1]*n
+    def rec(ind):
+        if ind==0:
+            return 0
+        if memo[ind]!=-1:
+            return memo[ind]
+        l= rec(ind-1) + abs(heights[ind]-heights[ind-1])
+        r=float('inf')
+        if ind>1:
+            r= rec(ind-2) + abs(heights[ind]-heights[ind-2])
+        memo[ind] = min(l,r)
+        return min(l,r)
+    
+    return rec(n-1)
+
+# BEST
+
+def frogJump(n: int, heights: List[int]) -> int:
+    dp=[-1]*n
+    dp[0]=0
+    
+    for ind in range(1,n):
+        
+        l= dp[ind-1] + abs(heights[ind]-heights[ind-1])
+        r= float('inf')
+        if ind>1:
+            r= dp[ind-2] + abs(heights[ind]-heights[ind-2])
+        dp[ind] = min(l,r)
+        
+    
+    return dp[n-1]
