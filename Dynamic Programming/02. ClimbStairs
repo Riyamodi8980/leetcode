@@ -1,0 +1,48 @@
+# RECURSSION
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        #  Write your code here.
+        
+        def count(count_stair):
+            if n==count_stair:
+                return 1
+            if n<count_stair:
+                return 0
+        
+            return count(count_stair+1)+count(count_stair+2)
+             
+        return count(0)
+# MEMOIZATION
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        #  Write your code here.
+        f=[-1]*(n+1)
+        def count(count_stair):
+            if n==count_stair:
+                return 1
+            if n<count_stair:
+                return 0
+            if f[count_stair]!=-1:
+                return f[count_stair]
+            f[count_stair]= count(count_stair+1)+count(count_stair+2)
+            return f[count_stair]
+        return count(0)
+        
+#SMART TECHNIQUE
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+
+        prev1=1
+        prev2=1
+        for i in range(2,n+1): #or for i in range(n-1)
+            cur=prev1+prev2
+            prev2=prev1
+            prev1=cur
+        return prev1
+        
+        
+
+
