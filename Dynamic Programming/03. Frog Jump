@@ -32,7 +32,7 @@ def frogJump(n: int, heights: List[int]) -> int:
     
     return rec(n-1)
 
-# BEST
+# TABULATION
 
 def frogJump(n: int, heights: List[int]) -> int:
     dp=[-1]*n
@@ -48,3 +48,22 @@ def frogJump(n: int, heights: List[int]) -> int:
         
     
     return dp[n-1]
+    
+# BEST
+def frogJump(n: int, heights: List[int]) -> int:
+    prev1=0
+#     prev2=0
+
+    
+    for ind in range(1,n):
+        
+        l= prev1 + abs(heights[ind]-heights[ind-1])
+        r = float('inf')
+        if ind>1:
+            r= prev2 + abs(heights[ind]-heights[ind-2])
+        cur = min(l, r)
+        
+        prev2=prev1
+        prev1=cur
+    
+    return prev1
